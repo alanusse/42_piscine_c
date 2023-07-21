@@ -1,0 +1,67 @@
+#include <unistd.h>
+
+void ft_print_numbers(char a_ten, char a_unit, char b_ten, char b_unit)
+{
+    char str[5];
+    
+    str[0] = a_ten;
+    str[1] = a_unit;
+    str[2] = ' ';
+    str[3] = b_ten;
+    str[4] = b_unit;
+    
+    write(1, str, 5);
+
+    if (a_ten <= '9' && a_unit <= '8')
+    {
+        write(1, ", ", 2);
+    }
+}
+
+void ft_print_comb(void)
+{
+    char a_ten;
+    char a_unit;
+    char b_ten;
+    char b_unit;
+    
+    a_ten = '0';
+    a_unit = '0';
+    b_ten = '0';
+    b_unit = '1';
+    while(a_ten < '9')
+    {
+        ft_print_numbers(a_ten, a_unit, b_ten, b_unit);
+        if (b_unit == '9')
+        {
+            if (b_ten == '9')
+            {
+                if (a_unit == '9')
+                {
+                    a_ten++;
+                    a_unit = '0';
+                }
+                else
+                {
+                    a_unit++;
+                }
+                b_ten = a_ten;
+                b_unit = a_unit + 1;
+            }
+            else
+            {
+                b_ten++;
+                b_unit = '0';
+            }
+        }
+        else
+        {
+            b_unit++;
+        }
+    }
+}
+
+int main() {
+    ft_print_comb();
+    return 0;
+}
